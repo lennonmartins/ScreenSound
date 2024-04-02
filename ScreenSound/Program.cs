@@ -2,37 +2,8 @@
 using ScreenSound.Menus;
 using ScreenSound.Modelos;
 
-try
-{
-    var artistaDAL = new ArtistaDAL();
-    /*    artistaDAL.Adicionar(new Artista("Foo Fighters", "Foo Fighters é uma banda de rock alternativo americana formada por Dave Grohl em 1995."));*/
-
-    var artistaPitty = new Artista("Pitty", "Priscilla Novaes Leone, mais conhecida como Pitty, é uma cantora, compositora, produtora, escritora e multi-instrumentista brasileira.") { Id = 1003 };
-
-    artistaDAL.Atualizar(artistaPitty);
-    artistaDAL.Deletar(artistaPitty);
-
-    var listaArtistas = artistaDAL.Listar();
-
-    foreach (var artista in listaArtistas)
-    {
-        Console.WriteLine(artista);
-    }
-}
-catch (Exception ex)
-{
-
-    Console.WriteLine(ex.Message);
-}
-
-return;
-
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
+var _soundContext = new ScreenSoundContext();
+var artistaDal = new DAL<Artista>(_soundContext);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -71,7 +42,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        menuASerExibido.Executar(artistaDal);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     } 
     else

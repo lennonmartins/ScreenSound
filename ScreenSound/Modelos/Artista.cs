@@ -15,7 +15,7 @@ internal class Artista
     public string FotoPerfil { get; set; }
     public string Bio { get; set; }
     public int Id { get; set; }
-
+    
     public void AdicionarMusica(Musica musica)
     {
         musicas.Add(musica);
