@@ -1,4 +1,6 @@
-﻿namespace ScreenSound.Banco;
+﻿using ScreenSound.Modelos;
+
+namespace ScreenSound.Banco;
 
 internal class DAL<T> where T : class
 {
@@ -39,5 +41,11 @@ internal class DAL<T> where T : class
         var objetoRetornado = _soundContext.Set<T>().FirstOrDefault(condicao);
         if (objetoRetornado == null) throw new Exception($"{condicao} não encontrado(a)!");
         return objetoRetornado;
+    }
+
+    public IEnumerable<T>? ListarPor(Func<T,bool> condicao)
+    {
+        var listaRetornada = _soundContext.Set<T>().Where(condicao);
+        return listaRetornada;
     }
 }
