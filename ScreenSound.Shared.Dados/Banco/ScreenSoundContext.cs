@@ -3,9 +3,9 @@ using ScreenSound.Modelos;
 
 namespace ScreenSound.Banco;
 
-internal class ScreenSoundContext : DbContext
+public class ScreenSoundContext : DbContext
 {
-    private string connectionString = "Host=localhost; Database=ScreenSoundV0; Username=postgres; Password=adm123";
+    private readonly string connectionString = "Host=localhost; Database=ScreenSoundV0; Username=postgres; Password=adm123";
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

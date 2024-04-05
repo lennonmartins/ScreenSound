@@ -2,9 +2,9 @@
 
 namespace ScreenSound.Banco;
 
-internal class DAL<T> where T : class
+public class DAL<T> where T : class
 {
-    protected readonly ScreenSoundContext _soundContext;
+    private readonly ScreenSoundContext _soundContext;
 
     public DAL(ScreenSoundContext soundContext)
     {
@@ -31,7 +31,7 @@ internal class DAL<T> where T : class
     public void Deletar(T objeto)
     {
         var artistaADeletar = _soundContext.Set<T>().AsEnumerable().FirstOrDefault(objeto);
-        if (artistaADeletar == null) throw new Exception($" {objeto} não encontrado(a)!");
+        if (artistaADeletar == null) throw new Exception("Busca não encontrada!");
         _soundContext.Remove(artistaADeletar);
         _soundContext.SaveChanges();
     }
@@ -39,7 +39,7 @@ internal class DAL<T> where T : class
     public T? RecuperarPelo(Func<T,bool> condicao)
     {
         var objetoRetornado = _soundContext.Set<T>().FirstOrDefault(condicao);
-        if (objetoRetornado == null) throw new Exception($"{condicao} não encontrado(a)!");
+        if (objetoRetornado == null) throw new Exception("Busca não encontrada!");
         return objetoRetornado;
     }
 
